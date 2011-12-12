@@ -2,24 +2,20 @@
 include('Avatar.class.php');	
 class AvatarRetro extends Avatar{
 	
-	public function __construct($size,$pixel,$filter = null){
-	
-		$this->initSize($size,$pixel);
-		$this->Filter($filter);
-		$this->image = imagecreate($this->taille_x,$this->taille_y);
-		
-		$this->initColorList($this->image);
-		$this->checkColors();
+	public function __construct($size,$pixel = null,$colors = null,$filter = null){
+		parent::__construct($size,$pixel,$colors,$filter);
 		$this->initGrille();
 		$this->drawImage($filter);
 	}
+	
 	public function initSize($size,$pixel){
 		$this->taille_x = $size[0];
 		$this->taille_y = $size[1];
 		
-		$this->pixel_x = $pixel[0];
-		$this->pixel_y = $pixel[1];
+		$this->pixel_x = $pixel != null ? $pixel[0] : $size[0]/10;
+		$this->pixel_y = $pixel != null ? $pixel[1] : $size[1]/10;
 	}
+	
 	public function initColorList(){
 		$this->colorList = array(
 			imagecolorallocate($this->image,255,0,0), //"red" => 

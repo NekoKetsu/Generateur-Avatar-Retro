@@ -4,31 +4,23 @@ class SpaceInvader extends Avatar{
 
 	private $spaceInvaderModel;
 	
-	public function __construct($size,$colors = null,$filter = null){
-		
-		$this->spaceInvaderModel = array(array(0,0,1,0,0,0),
-							 	array(0,0,0,1,0,0),
-							 	array(0,0,1,1,1,1),
-							 	array(0,1,1,0,1,1),
-							 	array(1,1,1,1,1,1),
-							 	array(1,0,1,1,1,1),
-							 	array(1,0,1,0,0,0),
-							 	array(0,0,0,1,1,0));
-		$this->initSize($size);
-		$this->image = imagecreate($this->taille_x,$this->taille_y);
-		if ($colors == null){
-			$this->initColorList();
-			$this->checkColors();
-		}else{
-			$this->primary_color = $colors[0];
-			$this->secondary_color = $colors[0];
+	public function __construct($size,$pixel = null,$colors = null,$filter = null){
+		parent::__construct($size,$pixel,$colors,$filter);
+		if (is_array($size)){
+			$this->spaceInvaderModel = array(array(0,0,1,0,0,0),
+								 	array(0,0,0,1,0,0),
+								 	array(0,0,1,1,1,1),
+								 	array(0,1,1,0,1,1),
+								 	array(1,1,1,1,1,1),
+								 	array(1,0,1,1,1,1),
+								 	array(1,0,1,0,0,0),
+								 	array(0,0,0,1,1,0));
+			
+			$this->initSpaceInvader();
 		}
-		
-		
-		$this->initSpaceInvader();
-		
 		$this->drawImage($filter);
 	}
+	
 	public function initColorList(){
 		$this->colorList = array(
 			imagecolorallocate($this->image,255,0,0), //"red" => 
@@ -41,7 +33,8 @@ class SpaceInvader extends Avatar{
 			imagecolorallocate($this->image,217,131,36) //"maroon" => 
 		);
 	}	
-	public function initSize($size){
+	
+	public function initSize($size,$pixel){
 		$this->taille_x = ($size % 11 != 0 ? intval($size/11) * 11 : $size);
 		$this->taille_y = intval($size/11) * 8;
 		

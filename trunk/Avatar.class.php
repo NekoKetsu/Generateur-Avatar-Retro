@@ -3,13 +3,39 @@
 abstract class Avatar{
 	
 	protected $colorList;
+	protected $colorLabelList = array("red","green","blue","purple","orange","black","yellow","maroon");
 	protected $filter;
 	protected $primary_color = null;
 	protected $secondary_color = null;
 	protected $grille;
 	protected $image;
 	
-	public function __construct(){}
+	protected $taille_x;
+	protected $taille_y;
+	protected $pixel_x;
+	protected $pixel_y;
+	
+	public function __construct($size,$pixel = null,$colors = null,$filter = null){
+	
+		if (!is_array($size)){
+			$this->regenAvatar($size);
+		}else{
+			$this->initSize($size,$pixel);
+			$this->Filter($filter);
+			$this->image = imagecreate($this->taille_x,$this->taille_y);
+			
+			if ($colors == null){
+				$this->initColorList();
+				$this->checkColors();
+			}else{
+				$this->primary_color = $colors[0];
+				$this->secondary_color = $colors[0];
+			}
+		}
+	}
+	
+	abstract function initSize($size,$pixel);
+	abstract function initColorList();
 	
 	public function Image($image=null){if ($image != null){ $this->image = $image; }else{ return $this->image;}}
 	public function Filter($filter=null){if ($filter != null){ $this->filter = $filter; }else{ return $this->filter;}}
@@ -51,7 +77,48 @@ abstract class Avatar{
 			$this->checkColors();
 		}
 	}	
+										
 	public function Hash(){
+		$r = "P".$this->primary_color."S".$this->secondary_color."X".$this->taille_x."Y".$this->taille_y."x".$this->pixel_x."y".$this->pixel_y."G".$this->hashGrille();
+		return $r;
+	}
+	public function hashGrille(){
+		$r="";
+		for ($x = 0 ; $x < ($this->taille_x/$this->pixel_x) ; $x++)	{
+			for ($y = 0 ; $y < ($this->taille_y/$this->pixel_y) ; $y++) {
+				$r .= $this->grille[$x][$y] == $this->primary_color ? 0 : 1 ;
+			}
+		}
+		return $r;
+	}
+
+	public function regenAvatar($hashCode){
+		preg_match('#X(\d*)#',$hashCode,$m);
+		$this->taille_x = $m[1];
+		preg_match('#Y(\d*)#',$hashCode,$m);
+		$this->taille_y = $m[1];
+		
+		$this->image = imagecreate($this->taille_x,$this->taille_y);
+		
+		$this->initColorList();
+		
+		preg_match('#x(\d*)#',$hashCode, $m);
+		$this->pixel_x = $m[1];
+		preg_match('#y(\d*)#',$hashCode, $m);
+		$this->pixel_y = $m[1];
+		preg_match('#P(\d)#',$hashCode, $m);
+		$this->primary_color = $this->colorList[$m[1]];
+		preg_match('#S(\d)#',$hashCode, $m);
+		$this->secondary_color = $this->colorList[$m[1]];
+		preg_match('#G(\d*)#',$hashCode, $m);
+		$hashGrille = str_split($m[1]);
+		$i = 0;
+		for ($x = 0 ; $x < ($this->taille_x/$this->pixel_x) ; $x++)	{
+			for ($y = 0 ; $y < ($this->taille_y/$this->pixel_y) ; $y++) {
+				$this->grille[$x][$y] = ($hashGrille[$i] == 0 ?  $this->primary_color : $this->secondary_color);
+				$i++;
+			}
+		}	
 		
 	}
 } 
