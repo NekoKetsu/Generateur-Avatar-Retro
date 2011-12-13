@@ -1,0 +1,53 @@
+<link rel="stylesheet" type="text/css" href="style.css" />
+<script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+<script type="text/javascript" src="js/JQueryformAjout.js"></script>
+<div id = "admin_bloc">
+	<div id="avatar_bloc">
+		<div id="image_bloc">
+		{IMAGE_GENERE}
+		</div>
+		<div id="resultat_bloc">
+		<input type="text" id="hashcode_avatar"/>
+		</div>
+	</div>
+	<div id="formulaire_bloc">
+		<form name="nouveau_avatar" method="post" action="#">
+			<fieldset>
+				<legend>Type : <img src="images/help.png" id="help" class="type_help"/></legend>
+				<select name="type" id="type">
+				   <option value="aleatoire">Aléatoire</option>
+				   <option value="SpaceInvader">SpaceInvader</option>
+				</select><br/><br/>
+			</fieldset>
+			
+			<fieldset>
+			<legend>Taille de l'avatar :</legend>
+			<label for="taille_x">X : </label><input type="range" id="taille_x" name = "taille_x" min="50" max="500" value="100"/><br/>
+			<label for="taille_y">Y : </label><input type="range" id="taille_y" name = "taille_y" min="50" max="500" value="100"/><br/>
+			</fieldset>
+			<fieldset>
+			<legend>Taille du pixel : <img src="images/help.png" id="help" class="pixel_help"/></legend>
+			<label for="pixel_x">X : </label><input type="range" name = "pixel_x" value="10"/><br/>
+			<label for="pixel_y">Y : </label><input type="range" name = "pixel_y" value="10"/><br/>
+			</fieldset>
+			
+			
+			<fieldset>
+			<legend>Couleurs : <img src="images/help.png" id="help" class="couleur_help"/></legend>
+			<label for="color_p">Primaire   : </label><input type="color" name = "color_p"/><br/>
+			<label for="color_s">Secondaire : </label><input type="color" name = "color_s"/><br/>
+			</fieldset>
+			
+			<fieldset>
+			<legend>Filtres : <span class="annotation">Optionnel</span><img src="images/help.png" id="help" class="filtre_help"/></legend>
+			
+			<label for="color_p">X : </label><input type="checkbox" name="degrade" id="degrade" /><br/>
+			</fieldset>
+			
+			<input type="submit" value="Générer"/>
+		</form>
+	</div>
+	<div id="help">
+		{HELP}
+	</div>
+</div>

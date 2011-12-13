@@ -1,11 +1,11 @@
 <?php
 include('Avatar.class.php');	
 class AvatarRetro extends Avatar{
-	
-	# __construct(Array int | int $size,[Array int $pixel = null[,String $colors = null,[String $filter = null]]])
+
+
 	public function __construct($size,$pixel = null,$colors = null,$filter = null){
 		parent::__construct($size,$pixel,$colors,$filter);
-		$this->initGrille();
+		if (is_array($size)){$this->initGrille();}
 		$this->drawImage($filter);
 	}
 	
@@ -15,6 +15,7 @@ class AvatarRetro extends Avatar{
 		
 		$this->pixel_x = $pixel != null ? $pixel[0] : $size[0]/10;
 		$this->pixel_y = $pixel != null ? $pixel[1] : $size[1]/10;
+		
 	}
 	
 	public function initColorList(){
@@ -30,7 +31,7 @@ class AvatarRetro extends Avatar{
 		);
 	}
 	
-	public function initGrille(){
+	private function initGrille(){
 		for ($x = 0 ; $x < ($this->taille_x/($this->pixel_x/2)) ; $x++)	{
 			for ($y = 0 ; $y < ($this->taille_y/$this->pixel_y) ; $y++) {
 				$n = rand(10,100);

@@ -1,10 +1,9 @@
 <?php
 require_once('Avatar.class.php');
-class SpaceInvader extends Avatar{
+class SpaceInvader extends Avatar {
 
-	private $spaceInvaderModel;
+	private $spaceInvaderModel = null;
 	
-	# __construct(Array int | int $size,[Array int $pixel = null[,String $colors = null,[String $filter = null]]])
 	public function __construct($size,$pixel = null,$colors = null,$filter = null){
 		parent::__construct($size,$pixel,$colors,$filter);
 		if (is_array($size)){
@@ -43,7 +42,7 @@ class SpaceInvader extends Avatar{
 		$this->pixel_y = $this->taille_y / 8;
 	}
 	
-	public function initSpaceInvader(){
+	private function initSpaceInvader(){
 		$b = (($this->taille_x/$this->pixel_x)-1);
 		for ($x = 0 ; $x <= (($this->taille_x/$this->pixel_x)/2) ; $x++)	{
 			for ($y = 0 ; $y < ($this->taille_y/$this->pixel_y) ; $y++) {
