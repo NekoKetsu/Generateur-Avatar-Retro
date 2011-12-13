@@ -16,6 +16,7 @@ abstract class Avatar{
 	protected $pixel_x;
 	protected $pixel_y;
 	
+	# __construct(Array int | int $size,[Array int $pixel = null[,String $colors = null,[String $filter = null]]])
 	public function __construct($size,$pixel = null,$colors = null,$filter = null){
 	
 		if (!is_array($size)){

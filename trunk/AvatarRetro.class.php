@@ -2,6 +2,7 @@
 include('Avatar.class.php');	
 class AvatarRetro extends Avatar{
 	
+	# __construct(Array int | int $size,[Array int $pixel = null[,String $colors = null,[String $filter = null]]])
 	public function __construct($size,$pixel = null,$colors = null,$filter = null){
 		parent::__construct($size,$pixel,$colors,$filter);
 		$this->initGrille();

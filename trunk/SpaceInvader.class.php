@@ -4,6 +4,7 @@ class SpaceInvader extends Avatar{
 
 	private $spaceInvaderModel;
 	
+	# __construct(Array int | int $size,[Array int $pixel = null[,String $colors = null,[String $filter = null]]])
 	public function __construct($size,$pixel = null,$colors = null,$filter = null){
 		parent::__construct($size,$pixel,$colors,$filter);
 		if (is_array($size)){
@@ -35,8 +36,8 @@ class SpaceInvader extends Avatar{
 	}	
 	
 	public function initSize($size,$pixel){
-		$this->taille_x = ($size % 11 != 0 ? intval($size/11) * 11 : $size);
-		$this->taille_y = intval($size/11) * 8;
+		$this->taille_x = ($size[0] % 11 != 0 ? intval($size[0]/11) * 11 : $size[0]);
+		$this->taille_y = intval($size[0]/11) * 8;
 		
 		$this->pixel_x = $this->taille_x / 11;
 		$this->pixel_y = $this->taille_y / 8;
