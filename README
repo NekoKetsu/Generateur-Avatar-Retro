@@ -1,0 +1,13 @@
+Structure du HashCode:
+
+exemple : "P3S5X396Y288x36y36G0000111010011000.."
+
+décomposition : {P3} {S5} {X396} {Y288} {x36} {y36} {G000001..}
+
+{P3} : Couleur Principale => Purple
+{S5} : Couleur Secondaire => Black
+{X396} : Taille en X de l'avatar
+{Y288} : Taille en Y de l'avatar
+{x36} : Taille d'un pixel en X de l'avatar
+{y36} : Taille d'un pixel en Y de l'avatar
+{G000001..} : Structure de l'avatar
