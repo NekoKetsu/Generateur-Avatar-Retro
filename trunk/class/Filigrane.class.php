@@ -9,43 +9,46 @@ class Filigrane{
 	private $size;
 	private $text;
 	private $textSize;
-	private $position;
+	private $position_x;
+	private $position_y;
 	private $opacity;
-	private $couleur;
+	private $color;
 	
 	
-	public function __construct($image_link,$position,$couleur,$text,$opacity = 100){
-		textSize($text[1]);
+	public function __construct($img,$position,$text,$color,$opacity = null){
+		textSize($text["size"]);
 		Position($position);
 		
-		Text($text[0]);
+		Text($text["val"]);
 		Opacity($opacity);
 		
-		$this->image = checkExtention($image_link);
+		$this->image = checkExtention($img);
 		setSize();
 		initColorList();
-		Couleur($couleur);
+		Color($color);
 		
 		DrawFiligrane();
 	}
 	
 	public function Text($text = null){ if($text != null){$this->text = $text; }else{ return $this->text;}}
 	public function textSize($textSize = null){ if($textSize != null){$this->textSize = $textSize; }else{ return $this->textSize;}}
-	public function Position($position = null){ if($position != null){$this->position = $position; }else{ return $this->position;}}
-	public function Couleur($couleur = null){ if($couleur != null){$this->couleur = $this->colorList[$couleur]; }else{ return $this->couleur;}}
-	public function Opacity($opacity = null){ if($opacity != null){$this->opacity = $opacity; }else{ return $this->opacity;}}
+	public function Position($position = null){ if($position != null){$this->position_x = $position[0];$this->position_y = $position[1]; }else{ return $this->position;}}
+	public function Color($couleur = null){ if($couleur != null){$this->couleur = $this->colorList[$couleur]; }else{ return $this->couleur;}}
+	public function Opacity($opacity = null){ if($opacity != null){
+		$this->opacity = $opacity != null ? $opacity : 100; 
+		}else{ return $this->opacity;}}
 	
 	private function setSize(){
 		 $this->size = array(imagex($this->image),imagey($this->image))
 	}
 	
-	private function checkExtention($image_link){
-		if (preg_match('#jpg#i',$image_link) || preg_match('#jpeg#i',$image_link)){return imagecreatefromjpeg($image_link);}
-		if (preg_match('#gif#i',$image_link)){return imagecreatefromgif($image_link);}
-		if (preg_match('#png#i',$image_link)){return imagecreatefrompng($image_link);}
+	private function checkExtention($img){
+		if (preg_match('#jpg#i',$img["val"]) || preg_match('#jpeg#i',$img["val"])){return imagecreatefromjpeg(implode('',$img));}
+		else if (preg_match('#gif#i',$img["val"])){return imagecreatefromgif(implode('',$img));}
+		else if (preg_match('#png#i',$img["val"])){return imagecreatefrompng(implode('',$img));}
 	}
 	private function DrawFiligrane(){
-		imagestring($this->image, 4, $this->position[0], $this->position[1], $this->text, $this-couleur);
+		imagestring($this->image, 4, $this->position[0], $this->position[1], $this->text, $this->color);
 	}
 	
 	public function initColorList(){

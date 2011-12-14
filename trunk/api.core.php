@@ -6,9 +6,13 @@ class ImgAPI{
 	
 	function __construct(){
 		$this->loadSetting();
+		
+		$this->purgeTemp();
+		die();
 	}
-	public function tmpdir(){
-		return $this->SETTINGS["tmpdir"];
+	
+	public function imgdir(){return $this->SETTINGS["imgdir"];}
+	public function tmpdir(){return $this->SETTINGS["tmpdir"];
 	}
 	private function loadSetting(){
 		$f = fopen('api.conf.ini','r');
@@ -20,10 +24,22 @@ class ImgAPI{
 			if (preg_match('#tpldir "(.+)"#',$buffer,$m)){ $this->SETTINGS['tpldir'] = $m[1]; continue;}
 			if (preg_match('#cldir "(.+)"#',$buffer,$m)){ $this->SETTINGS['cldir'] = $m[1]; continue;}
 			if (preg_match('#jsdir "(.+)"#',$buffer,$m)){ $this->SETTINGS['jsdir'] = $m[1]; continue;}
+			if (preg_match('#tmp_png_time "(.+)"#',$buffer,$m)){ $this->SETTINGS['tmp_png_time'] = $m[1]; continue;}
     	}
 	}
-	
-	public function createImage($type,$size,$pixel,$colors,$filter){
+	private function purgeTemp(){
+		$d = opendir($this->SETTINGS["tmpdir"]);
+		while(false !== ($f = readdir($d))) {
+            if(!is_dir($this->SETTINGS["tmpdir"].$f.'/')){
+				if(preg_match('#.png#',$f)){
+					if((time()-filemtime($this->SETTINGS["tmpdir"].$f))/3600 > $this->SETTINGS["tmp_png_time"])
+                 		unlink($this->SETTINGS["tmpdir"].$f);
+				}
+            }
+        } 
+        closedir($d);
+	}
+	public function createAvatar($type,$size,$pixel,$colors,$filter){
 		if ($type != 'SpaceInvader'){
 			include_once($this->SETTINGS['cldir'].'AvatarRetro.class.php');
 			$this->image = new AvatarRetro($size,$pixel,$colors,$filter);
@@ -31,6 +47,10 @@ class ImgAPI{
 			include_once($this->SETTINGS['cldir'].'SpaceInvader.class.php');
 			$this->image = new SpaceInvader($size,$pixel,$colors,$filter);
 		}
+	}
+	public function filImage($image_link,$position,$couleur,$text,$opacity){
+		include_once($this->SETTINGS['cldir'].'Filigrane.class.php');
+		$this->image = new Filigrane($image_link,$position,$couleur,$text,$opacity = 100);
 	}
 	
 	public function FormGenAvatar(){
@@ -41,8 +61,8 @@ class ImgAPI{
 	}
 	public function FormAjoutFiligrane(){echo file_get_contents($this->SETTINGS['tpldir'].'formFiligrane.html');}
 	
-	public function Hash($avatar){
-		$r = "P".$avatar->Primary_color()."S".$avatar->Secondary_color()."X".$avatar->Taille_x()."Y".$avatar->Taille_y()."x".$avatar->Pixel_x()."y".$avatar->Pixel_y()."G".$this->hashGrille($avatar);
+	public function Hash($a){
+		$r = "P".$a->Primary_color()."S".$a->Secondary_color()."X".$a->Taille_x()."Y".$a->Taille_y()."x".$a->Pixel_x()."y".$a->Pixel_y()."G".$this->hashGrille($a);
 		return $r;
 	}
 	
