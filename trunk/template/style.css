@@ -64,7 +64,7 @@ div#help{
 	border:1px solid black;
 	width:20%;
 	height:100%;
-	
+	font-size:12px;
 	-moz-border-radius: 55px 20px 55px 20px / 20px 55px 20px 55px;
 	border-radius: 55px 20px 55px 20px / 20px 55px 20px 55px;
 	-webkit-box-shadow:rgba(0, 0, 0, 0.4) 5px 5px inset;
@@ -79,4 +79,17 @@ div#image_bloc{
 
 div#resultat_bloc{
 	margin-bottom:50px;
+}
+
+div#type_help{
+	display:none;
+}
+div#pixel_help{
+	display:none;
+}
+div#couleur_help{
+	display:none;
+}
+div#filtre_help{
+	display:none;
 }

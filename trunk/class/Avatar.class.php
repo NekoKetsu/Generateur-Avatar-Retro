@@ -8,7 +8,7 @@ abstract class Avatar{
 	protected $filter;
 	protected $primary_color = null;
 	protected $secondary_color = null;
-	protected $grille;
+	public $grille;
 	protected $image;
 	
 	protected $taille_x;
@@ -17,29 +17,32 @@ abstract class Avatar{
 	protected $pixel_y;
 	
 	public function __construct($size,$pixel = null,$colors = null,$filter = null){
-	
-		if (!is_array($size)){
+		
+		if (!is_array($size) && $size != null){
 			$this->regenAvatar($size);
 		}else{
 			$this->initSize($size,$pixel);
 			$this->Filter($filter);
 			$this->image = imagecreate($this->taille_x,$this->taille_y);
 			
-			if ($colors == null){
-				$this->initColorList();
-				$this->checkColors();
-			}else{
-				$this->primary_color = $colors[0];
-				$this->secondary_color = $colors[0];
-			}
+			$this->initColorList();
+			$this->checkColors($colors);
+			
 		}
 	}
 	
 	abstract function initSize($size,$pixel);
 	abstract function initColorList();
 	
-	public function Image($image=null){if ($image != null){ $this->image = $image; }else{ return $this->image;}}
+	public function Primary_color($Pc = null){if ($Pc != null){$this->primary_color = $Pc;}else{return $this->primary_color;}}
+	public function Secondary_color($Sc = null){if ($Sc != null){$this->secondary_color = $Sc;}else{return $this->secondary_color;}}
+	public function Taille_x($Tx = null){if ($Tx != null){$this->taille_x = $Tx;}else{return $this->taille_x;}}
+	public function Taille_y($Ty = null){if ($Ty != null){$this->taille_y = $Ty;}else{return $this->taille_y;}}
+	public function Pixel_x($Px = null){if ($Px != null){$this->pixel_x = $Px;}else{return $this->pixel_x;}}
+	public function Pixel_y($Py = null){if ($Py != null){$this->pixel_y = $Py;}else{return $this->pixel_y;}}
+	public function Image($Img=null){if ($Img != null){ $this->image = $Img; }else{ return $this->image;}}
 	public function Filter($filter=null){if ($filter != null){ $this->filter = $filter; }else{ return $this->filter;}}
+
 	
 	private function initGrille(){
 		for ($x = 0 ; $x < ($this->taille_x/($this->pixel_x/2)) ; $x++)	{
@@ -70,51 +73,25 @@ abstract class Avatar{
 		}
 	}
 	
-	private function checkColors(){
-		$this->primary_color = $this->primary_color == null ? $this->colorList[rand(0,(count($this->colorList)-1))] : $this->primary_color ;
+	private function checkColors($colors){
 
-		if (($this->primary_color == $this->secondary_color) || ($this->secondary_color == null)){
-			$this->secondary_color = $this->colorList[rand(0,(count($this->colorList)-1))];
+		/* Si (pas de primaire Xor une couleur est renseignée)
+		   Car dans tous les cas si une couleur est renseignée, on peut lui attribuer*/
+		if ($this->primary_color != null ^ $colors[0] != 'null'){
+			$this->primary_color = $this->colorList[$colors[0]];
+		}else{
+			$this->primary_color = $this->colorList[rand(0,(count($this->colorList)-1))];
+		}
+
+		/* Si (primaire = secondaire Xor pas de secondaire)
+		   Car dans tous les cas si une couleur est renseignée, on peut lui attribuer*/
+		if (($this->primary_color == $this->secondary_color) ^ ($this->secondary_color == null)){
+			$this->secondary_color = $colors[1] != 'null' ? $this->colorList[$colors[1]] : $this->colorList[rand(0,(count($this->colorList)-1))];
 			$this->checkColors();
 		}
 	}	
 										
-	public function Hash(){
-		$r = "P".$this->primary_color."S".$this->secondary_color."X".$this->taille_x."Y".$this->taille_y."x".$this->pixel_x."y".$this->pixel_y."G".$this->hashGrille();
-		return $r;
-	}
-	private function hashGrille(){
-		$binCode="";
-		$hexaCode="";
-		for ($x = 0 ; $x < ($this->taille_x/$this->pixel_x) ; $x++)	{
-			for ($y = 0 ; $y < ($this->taille_y/$this->pixel_y) ; $y++) {
-				$binCode .= $this->grille[$x][$y] == $this->primary_color ? 0 : 1 ;
-			}
-		}
-		
-		$code = str_split($binCode,8);
-		
-		foreach ($code as $key=>$value){
-			$hexaCode .= $this->bin2asc($value);
-		}
-		
-		return $hexaCode;
-		
-	}
-	function bin2asc($in){
-		$out = '';
-		for ($i = 0, $len = strlen($in); $i < $len; $i += 8){
-			$out .= chr(bindec(substr($in,$i,8)));
-		}
-		return $out; 
-	}
-	function asc2bin($in){
-		$out = '';
-		for ($i = 0, $len = strlen($in); $i < $len; $i++){
-			$out .= sprintf("%08b",ord($in{$i}));
-		}
-		return $out;
-	}
+	
 	private function regenAvatar($hashCode){
 		preg_match('#X(\d*)#',$hashCode,$m);
 		$this->taille_x = $m[1];
@@ -143,6 +120,14 @@ abstract class Avatar{
 			}
 		}	
 		
+	}
+	
+	function asc2bin($in){
+		$out = '';
+		for ($i = 0, $len = strlen($in); $i < $len; $i++){
+			$out .= sprintf("%08b",ord($in{$i}));
+		}
+		return $out;
 	}
 } 
 ?>
