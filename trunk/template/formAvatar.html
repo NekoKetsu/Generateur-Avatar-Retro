@@ -1,6 +1,12 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
 <link rel="stylesheet" type="text/css" href="template/style.css" />
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
 <script type="text/javascript" src="{_JSURL}JQueryformAjout.js"></script>
+</head>
+<body>
 <div id = "admin_bloc">
 
 	<div id="avatar_bloc">
@@ -11,7 +17,7 @@
 	<div id="formulaire_bloc">
 		<form name="nouveau_avatar" method="post" action="#">
 			<fieldset>
-				<legend>Type : <img src="{_IMGURL}help.png" id="help" class="type_help"/></legend>
+				<legend>Type : <img src="{_IMGURL}help.png" class="help type_help" alt="help.png"/></legend>
 				<select name="type" id="type">
 				   <option value="Aleatoire">Al&eacute;atoire</option>
 				   <option value="SpaceInvader">SpaceInvader</option>
@@ -23,20 +29,20 @@
 				<label for="taille_y">Y : </label><input type="range" id="taille_y" name = "taille_y" min="50" max="500" value="100"/><br/>
 			</fieldset>
 			<fieldset>
-				<legend>Taille du pixel : <img src="{_IMGURL}help.png" id="help" class="pixel_help"/></legend>
+				<legend>Taille du pixel : <img src="{_IMGURL}help.png" class="help pixel_help" alt="help.png"/></legend>
 				<label for="pixel_x">X : </label><input type="range" id = "pixel_x" name = "pixel_x" value="10"/><br/>
 				<label for="pixel_y">Y : </label><input type="range" id = "pixel_y" name = "pixel_y" value="10"/><br/>
 			</fieldset>
 			<fieldset>
-				<legend>Couleurs : <img src="{_IMGURL}help.png" id="help" class="couleur_help"/></legend>
+				<legend>Couleurs : <img src="{_IMGURL}help.png" class="help couleur_help" alt="help.png"/></legend>
 				<label for="color_p">Primaire   : </label><input type="color" id = "color_p" name = "color_p"/><br/>
 				<label for="color_s">Secondaire : </label><input type="color" id = "color_s" name = "color_s"/><br/>
 			</fieldset>
 			<fieldset>
-				<legend>Filtres : <span class="annotation">Optionnel</span><img src="{_IMGURL}help.png" id="help" class="filtre_help"/></legend>
+				<legend>Filtres : <span class="annotation">Optionnel</span><img src="{_IMGURL}help.png" class="help filtre_help" alt="help.png"/></legend>
 				<label for="color_p">X : </label><input type="checkbox" name="degrade" id="degrade" /><br/>
 			</fieldset>
-			<input type="button" id = "submit" value="Générer"/>
+			<input type="button" id = "submit" value="G&eacute;n&eacute;rer"/>
 		</form>
 	</div>
 	<div id="help">
@@ -58,27 +64,26 @@
 		</div>
 		<div id="type_help">
 			<u>Type:</u><br/>
-			Vous pouvez choisir entre deux génération d'avatar, une génération aléatoire des formes ou un space Invader
-			<img src="images/ex_aleatoire.png"/> | <img src="images/sx_spaceInvader.png" />
+			Vous pouvez choisir entre deux g&eacute;n&eacute;ration d'avatar, une g&eacute;n&eacute;ration al&eacute;atoire des formes ou un space Invader
+			<img src="images/ex_aleatoire.png" alt="ex_aleatoire.png"/> | <img src="images/sx_spaceInvader.png" alt="sx_spaceInvader.png" />
 		</div>
 
 		<div id="pixel_help">
 			<u>Pixel:</u><br/>
-			Vous pouvez choisir entre deux génération d'avatar, une génération aléatoire des formes ou un space Invader
-			<img src="images/ex_aleatoire.png"/> | <img src="images/sx_spaceInvader.png" />
+			<img src="images/ex_aleatoire.png" alt="ex_aleatoire.png"/> | <img src="images/sx_spaceInvader.png" alt="sx_spaceInvader.png"/>
 		</div>
 		
 		<div id="couleur_help">
 			<u>Couleur:</u><br/>
-			Vous pouvez choisir entre deux génération d'avatar, une génération aléatoire des formes ou un space Invader
-			<img src="images/ex_aleatoire.png"/> | <img src="images/sx_spaceInvader.png" />
+			<img src="images/ex_aleatoire.png" alt="ex_aleatoire.png"/> | <img src="images/sx_spaceInvader.png" alt="sx_spaceInvader.png"/>
 		</div>
 		
 		<div id="filtre_help">
 			<u>Filtre:</u><br/>
-			Vous pouvez choisir entre deux génération d'avatar, une génération aléatoire des formes ou un space Invader
-			<img src="images/ex_aleatoire.png"/> | <img src="images/sx_spaceInvader.png" />
+			<img src="images/ex_aleatoire.png" alt="ex_aleatoire.png"/> | <img src="images/sx_spaceInvader.png" alt="sx_spaceInvader.png"/>
 		</div>
 		
 	</div>
 </div>
+</body>
+</html>

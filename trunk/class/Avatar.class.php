@@ -77,7 +77,7 @@ abstract class Avatar{
 
 		/* Si (pas de primaire Xor une couleur est renseignée)
 		   Car dans tous les cas si une couleur est renseignée, on peut lui attribuer*/
-		if ($this->primary_color != null ^ $colors[0] != 'null'){
+		if (($this->primary_color != null) ^ ($colors[0] != 'null')){
 			$this->primary_color = $this->colorList[$colors[0]];
 		}else{
 			$this->primary_color = $this->colorList[rand(0,(count($this->colorList)-1))];

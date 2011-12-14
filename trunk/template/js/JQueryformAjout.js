@@ -1,6 +1,6 @@
 $(function(){
 	// au click sur le point d'interrogation, affichage du panel d'aide correspondant
-	$('img#help').bind('click',function(){
+	$('img.help').bind('click',function(){
 		$('.showed').css('display','none');
 		$('.showed').removeClass('showed');
 		$('div#'+$(this).attr('class')).css('display','block');

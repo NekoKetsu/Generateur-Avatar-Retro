@@ -50,7 +50,7 @@ div#formulaire_bloc{
 	
 }
 
-img#help{
+img.help{
 	vertical-align: top;
 	float:right;
 	clear:none;
