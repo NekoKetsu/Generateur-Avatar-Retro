@@ -26,7 +26,9 @@ abstract class Avatar{
 			$this->image = imagecreate($this->taille_x,$this->taille_y);
 			
 			$this->initColorList();
-			$this->checkColors($colors);
+			$this->primary_color = $colors[0] != 'null' ? $this->colorList[$colors[0]] : null;
+		 	$this->secondary_color = $colors[1] != 'null' ? $this->colorList[$colors[1]] : null;
+			$this->checkColors();
 			
 		}
 	}
@@ -73,20 +75,18 @@ abstract class Avatar{
 		}
 	}
 	
-	private function checkColors($colors){
+	private function checkColors(){
 
 		/* Si (pas de primaire Xor une couleur est renseignée)
 		   Car dans tous les cas si une couleur est renseignée, on peut lui attribuer*/
-		if (($this->primary_color != null) ^ ($colors[0] != 'null')){
-			$this->primary_color = $this->colorList[$colors[0]];
-		}else{
+		if ($this->primary_color == null){
 			$this->primary_color = $this->colorList[rand(0,(count($this->colorList)-1))];
 		}
 
 		/* Si (primaire = secondaire Xor pas de secondaire)
 		   Car dans tous les cas si une couleur est renseignée, on peut lui attribuer*/
 		if (($this->primary_color == $this->secondary_color) ^ ($this->secondary_color == null)){
-			$this->secondary_color = $colors[1] != 'null' ? $this->colorList[$colors[1]] : $this->colorList[rand(0,(count($this->colorList)-1))];
+			$this->secondary_color = $this->colorList[rand(0,(count($this->colorList)-1))];
 			$this->checkColors();
 		}
 	}	
@@ -111,7 +111,7 @@ abstract class Avatar{
 		preg_match('#S(\d)#',$hashCode, $m);
 		$this->secondary_color = $this->colorList[$m[1]];
 		preg_match('#G(.*)#',$hashCode, $m);
-		$hashGrille = $this->asc2bin($m[1]);
+		$hashGrille = $this->asc2bin(urldecode($m[1]));
 		$i = 0;
 		for ($x = 0 ; $x < ($this->taille_x/$this->pixel_x) ; $x++)	{
 			for ($y = 0 ; $y < ($this->taille_y/$this->pixel_y) ; $y++) {

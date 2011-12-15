@@ -1,45 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
 <link rel="stylesheet" type="text/css" href="template/style.css" />
-<script type="text/javascript" src="template/js/jquery-1.7.1.min.js"></script>
-<script type="text/javascript" src="template/js/JQueryformFiligrane.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+<script type="text/javascript" src="{_JSURL}JQueryformFiligrane.js"></script>
+</head>
+<body>
 <div id = "admin_bloc">
 
 	<div id="avatar_bloc">
 		<div id="image_bloc"></div>
-		<div id="resultat_bloc"><input type="text" id="hashcode_avatar"/></div>
+		<div id="resultat_bloc"><input type="text" id="hashcode_avatar" size="75"/></div>
 	</div>
 	
 	<div id="formulaire_bloc">
 		<form name="nouveau_avatar" method="post" action="#">
 			<fieldset>
-				<legend>Type : <img src="template/images/help.png" id="help" class="type_help"/></legend>
-				<select name="type" id="type">
-				   <option value="aleatoire">Al&eacute;atoire</option>
-				   <option value="SpaceInvader">SpaceInvader</option>
-				</select><br/><br/>
+				<legend>Chemin du dossier des images : <img src="{_IMGURL}help.png" class="help type_help" alt="help.png"/></legend>
+				<input type="url" id = "dir" name = "dir" value="{_FILIMGDIR}"/><br/>
 			</fieldset>
 			<fieldset>
-				<legend>Taille de l'avatar :</legend>
-				<label for="taille_x">X : </label><input type="range" id="taille_x" name = "taille_x" min="50" max="500" value="100"/><br/>
-				<label for="taille_y">Y : </label><input type="range" id="taille_y" name = "taille_y" min="50" max="500" value="100"/><br/>
+				<legend>Texte du filigrane :</legend>
+				<input type="text" id="text" name = "text" size="50" maxlength="50" value="{_FILIMGTEXT}"/><br/>
+				<!--<input type="range" id="text_size" name = "text_size" min="0" max="4" value="{_FILIMGTEXTSIZE}" size="4" maxlength="4"/><br/>-->
 			</fieldset>
 			<fieldset>
-				<legend>Taille du pixel : <img src="template/images/help.png" id="help" class="pixel_help"/></legend>
-				<label for="pixel_x">X : </label><input type="range" name = "pixel_x" value="10"/><br/>
-				<label for="pixel_y">Y : </label><input type="range" name = "pixel_y" value="10"/><br/>
+				<legend>Position : <img src="{_IMGURL}help.png" class="help pixel_help" alt="help.png"/></legend>
+				<select name="position" id="position">
+					<option value="0">Haut-Droite</option>
+					<option value="1">Haut-Gauche</option>
+					<option value="2">Bas-Droite</option>
+					<option value="3">Bas-Gauche</option>
+					<option value="4">Centr&eacute;-Bas</option>
+					<option value="5">Centr&eacute;-Haut</option>
+					<option value="6">Centr&eacute;-Milieu</option>
+				</select><br/>
 			</fieldset>
 			<fieldset>
-				<legend>Couleurs : <img src="template/images/help.png" id="help" class="couleur_help"/></legend>
-				<label for="color_p">Primaire   : </label><input type="color" name = "color_p"/><br/>
-				<label for="color_s">Secondaire : </label><input type="color" name = "color_s"/><br/>
+				<legend>Couleurs : <img src="{_IMGURL}help.png" class="help color_help" alt="help.png"/></legend>
+				<select name="color" id="color">
+					<option class="color_0" value="0">Rouge</option>
+					<option class="color_1" value="1">Vert</option>
+					<option class="color_2" value="2">Bleu</option>
+					<option class="color_3" value="3">Violet</option>
+					<option class="color_4" value="4">Orange</option>
+					<option class="color_5" value="5">Noir</option>
+					<option class="color_6" value="6">Jaune</option>
+					<option class="color_7" value="7">Marron</option>
+				</select><br/>
+				<input type="hidden" id="color_id" value="{_FILIMGCOLOR}"/>
 			</fieldset>
 			<fieldset>
-				<legend>Filtres : <span class="annotation">Optionnel</span><img src="template/images/help.png" id="help" class="filtre_help"/></legend>
-				<label for="color_p">X : </label><input type="checkbox" name="degrade" id="degrade" /><br/>
+				<legend>Opacit&eacute; : <span class="annotation">Optionnel</span><img src="{_IMGURL}help.png" class="help filtre_help" alt="help.png"/></legend>
+				<input type="range" id="opacity" name = "opacity" min="0" max="100" value="{_FILIMGOPACITY}" size="3" maxlength="3"/><br/>
 			</fieldset>
-			<input type="button" id = "submit" value="Générer"/>
+			<input type="button" id = "save_button" class = "button" value="Sauvegarder"/>
+			<input type="button" id = "preview_button" class = "button" value="Apercu"/>
 		</form>
 	</div>
-	<div id="help">
+	<div id="help_bloc">
 		<div id="aide_principale" class="showed">
 			Ce Formulaire sert &agrave; la g&eacute;n&eacute;ration d'avatar.<br/><br/>
 			<u>Type:</u><br/>
@@ -56,29 +76,32 @@
 			<u>Filtres :</u><br/>
 			D&eacute;grad&eacute; : Possibilit&eacute; de faire un avatar d&eacute;grad&eacute;
 		</div>
-		<div id="type_help">
-			<u>Type:</u><br/>
-			Vous pouvez choisir entre deux génération d'avatar, une génération aléatoire des formes ou un space Invader
-			<img src="images/ex_aleatoire.png"/> | <img src="images/sx_spaceInvader.png" />
+		<div id="dir_help">
+			<u>Chemin:</u><br/>
+			Vous pouvez choisir entre deux g&eacute;n&eacute;ration d'avatar, une g&eacute;n&eacute;ration al&eacute;atoire des formes ou un space Invader
+			<img src="images/ex_aleatoire.png" alt="ex_aleatoire.png"/> | <img src="images/sx_spaceInvader.png" alt="sx_spaceInvader.png" />
 		</div>
 
-		<div id="pixel_help">
-			<u>Pixel:</u><br/>
-			Vous pouvez choisir entre deux génération d'avatar, une génération aléatoire des formes ou un space Invader
-			<img src="images/ex_aleatoire.png"/> | <img src="images/sx_spaceInvader.png" />
+		<div id="text_help">
+			<u>Texte:</u><br/>
+			<img src="images/ex_aleatoire.png" alt="ex_aleatoire.png"/> | <img src="images/sx_spaceInvader.png" alt="sx_spaceInvader.png"/>
+		</div>
+		<div id="position_help">
+			<u>Position:</u><br/>
+			<img src="images/ex_aleatoire.png" alt="ex_aleatoire.png"/> | <img src="images/sx_spaceInvader.png" alt="sx_spaceInvader.png"/>
 		</div>
 		
-		<div id="couleur_help">
+		<div id="color_help">
 			<u>Couleur:</u><br/>
-			Vous pouvez choisir entre deux génération d'avatar, une génération aléatoire des formes ou un space Invader
-			<img src="images/ex_aleatoire.png"/> | <img src="images/sx_spaceInvader.png" />
+			<img src="images/ex_aleatoire.png" alt="ex_aleatoire.png"/> | <img src="images/sx_spaceInvader.png" alt="sx_spaceInvader.png"/>
 		</div>
 		
-		<div id="filtre_help">
-			<u>Filtre:</u><br/>
-			Vous pouvez choisir entre deux génération d'avatar, une génération aléatoire des formes ou un space Invader
-			<img src="images/ex_aleatoire.png"/> | <img src="images/sx_spaceInvader.png" />
+		<div id="opacity_help">
+			<u>OpacitÃ©:</u><br/>
+			<img src="images/ex_aleatoire.png" alt="ex_aleatoire.png"/> | <img src="images/sx_spaceInvader.png" alt="sx_spaceInvader.png"/>
 		</div>
 		
 	</div>
 </div>
+</body>
+</html>

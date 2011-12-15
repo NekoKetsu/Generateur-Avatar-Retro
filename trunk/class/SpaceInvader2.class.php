@@ -6,15 +6,16 @@ class SpaceInvader extends Avatar {
 	
 	public function __construct($size,$pixel = null,$colors = null,$filter = null){
 		parent::__construct($size,$pixel,$colors,$filter);
-		if (is_array($size)){
-			$this->spaceInvaderModel = array(array(0,0,1,0,0,0),
-											 	array(0,0,0,1,0,0),
-											 	array(0,0,1,1,1,1),
-											 	array(0,1,1,0,1,1),
+		if (is_array($size)){											
+			$this->spaceInvaderModel = array(array(0,0,0,0,1,1),
+											 	array(0,1,1,1,1,1),
 											 	array(1,1,1,1,1,1),
-											 	array(1,0,1,1,1,1),
-											 	array(1,0,1,0,0,0),
-											 	array(0,0,0,1,1,0));			
+											 	array(1,1,1,0,0,1),
+											 	array(1,1,1,1,1,1),
+											 	array(0,0,0,1,1,1),
+											 	array(0,0,1,1,0,1),
+											 	array(1,1,0,0,0,0));
+			
 			$this->initSpaceInvader();
 		}
 		$this->drawImage($filter);
@@ -34,10 +35,10 @@ class SpaceInvader extends Avatar {
 	}	
 	
 	public function initSize($size,$pixel){
-		$this->taille_x = ($size[0] % 11 != 0 ? intval($size[0]/11) * 11 : $size[0]);
-		$this->taille_y = intval($size[0]/11) * 8;
+		$this->taille_x = ($size[0] % 12 != 0 ? intval($size[0]/12) * 12 : $size[0]);
+		$this->taille_y = intval($size[0]/12) * 8;
 		
-		$this->pixel_x = $this->taille_x / 11;
+		$this->pixel_x = $this->taille_x / 12;
 		$this->pixel_y = $this->taille_y / 8;
 	}
 	

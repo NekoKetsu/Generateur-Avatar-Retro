@@ -1,0 +1,6 @@
+filimgdir "tmp/"
+filimgtext "aaaaaaaaaaaaaaaaaa"
+filimgcolor "3"
+filimgopacity "100"
+filimgposition "0"
+filimgtextsize "2"

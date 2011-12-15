@@ -1,6 +1,7 @@
 body{
 	
 }
+
 .annotation{
 	font-size:9px;
 	vertical-align: super;
@@ -14,6 +15,7 @@ div#admin_bloc{
 	width:auto;
 }
 div#avatar_bloc{
+	
 	display: inline-block;
 	vertical-align: top;
 	
@@ -21,8 +23,9 @@ div#avatar_bloc{
 	text-align:center;
 	padding:10px;
 	width:45%;
-	height:100%;
+	height:417px;
 	
+	min-width:517px;
 	-moz-border-radius: 55px 20px 55px 20px / 20px 55px 20px 55px;
 	border-radius: 55px 20px 55px 20px / 20px 55px 20px 55px;
 	-webkit-box-shadow:rgba(0, 0, 0, 0.4) 5px 5px inset;
@@ -37,7 +40,7 @@ div#formulaire_bloc{
 	
 	border:1px solid black;
 	padding:10px;
-	height:100%;
+	height:417px;
 	width:auto;
 	clear:none;
 	
@@ -56,14 +59,14 @@ img.help{
 	clear:none;
 }
 
-div#help{
+div#help_bloc{
 	display:inline-block;
 	vertical-align:top;
 	clear:none;
 	padding:10px;
 	border:1px solid black;
 	width:20%;
-	height:100%;
+	height:417px;
 	font-size:12px;
 	-moz-border-radius: 55px 20px 55px 20px / 20px 55px 20px 55px;
 	border-radius: 55px 20px 55px 20px / 20px 55px 20px 55px;
@@ -74,22 +77,20 @@ div#help{
 }
 
 div#image_bloc{
-	height:80%;
+	height:90%;
+	vertical-align: middle;
 }
 
 div#resultat_bloc{
 	margin-bottom:50px;
 }
 
-div#type_help{
-	display:none;
-}
-div#pixel_help{
-	display:none;
-}
-div#couleur_help{
-	display:none;
-}
-div#filtre_help{
-	display:none;
-}
+div#type_help{display:none;}
+div#pixel_help{display:none;}
+div#color_help{display:none;}
+div#filtre_help{display:none;}
+div#dir_help{display:none;}
+div#text_help{display:none;}
+div#position_help{display:none;}
+div#color_help{display:none;}
+div#opacity_help{display:none;}

@@ -4,7 +4,7 @@
 <title></title>
 <link rel="stylesheet" type="text/css" href="template/style.css" />
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
-<script type="text/javascript" src="{_JSURL}JQueryformAjout.js"></script>
+<script type="text/javascript" src="{_JSURL}JQueryformAvatar.js"></script>
 </head>
 <body>
 <div id = "admin_bloc">
@@ -25,27 +25,49 @@
 			</fieldset>
 			<fieldset>
 				<legend>Taille de l'avatar :</legend>
-				<label for="taille_x">X : </label><input type="range" id="taille_x" name = "taille_x" min="50" max="500" value="100"/><br/>
-				<label for="taille_y">Y : </label><input type="range" id="taille_y" name = "taille_y" min="50" max="500" value="100"/><br/>
+				<label for="taille_x">X : </label><input type="range" id="taille_x" name = "taille_x" min="50" max="500" value="300" size="5" maxlength="3"/><br/>
+				<label for="taille_y">Y : </label><input type="range" id="taille_y" name = "taille_y" min="50" max="500" value="300" size="5" maxlength="3"/><br/>
 			</fieldset>
 			<fieldset>
 				<legend>Taille du pixel : <img src="{_IMGURL}help.png" class="help pixel_help" alt="help.png"/></legend>
-				<label for="pixel_x">X : </label><input type="range" id = "pixel_x" name = "pixel_x" value="10"/><br/>
-				<label for="pixel_y">Y : </label><input type="range" id = "pixel_y" name = "pixel_y" value="10"/><br/>
+				<label for="pixel_x">X : </label><input type="range" id = "pixel_x" name = "pixel_x" value="30" size="5" maxlength="3"/><br/>
+				<label for="pixel_y">Y : </label><input type="range" id = "pixel_y" name = "pixel_y" value="30" size="5" maxlength="3"/><br/>
 			</fieldset>
 			<fieldset>
-				<legend>Couleurs : <img src="{_IMGURL}help.png" class="help couleur_help" alt="help.png"/></legend>
-				<label for="color_p">Primaire   : </label><input type="color" id = "color_p" name = "color_p"/><br/>
-				<label for="color_s">Secondaire : </label><input type="color" id = "color_s" name = "color_s"/><br/>
+				<legend>Couleurs : <img src="{_IMGURL}help.png" class="help color_help" alt="help.png"/></legend>
+				<label for="color_p">Primaire  : &nbsp;&nbsp;&nbsp;</label>
+				<select name="color_p" id="color_p">
+					<option value=""></option>
+					<option class="color_0" value="0">Rouge</option>
+					<option class="color_1" value="1">Vert</option>
+					<option class="color_2" value="2">Bleu</option>
+					<option class="color_3" value="3">Violet</option>
+					<option class="color_4" value="4">Orange</option>
+					<option class="color_5" value="5">Noir</option>
+					<option class="color_6" value="6">Jaune</option>
+					<option class="color_7" value="7">Marron</option>
+				</select><br/>
+				<label for="color_s">Secondaire : </label>
+				<select name="color_s" id="color_s">
+					<option value=""></option>
+					<option class="color_0" value="0">Rouge</option>
+					<option class="color_1" value="1">Vert</option>
+					<option class="color_2" value="2">Bleu</option>
+					<option class="color_3" value="3">Violet</option>
+					<option class="color_4" value="4">Orange</option>
+					<option class="color_5" value="5">Noir</option>
+					<option class="color_6" value="6">Jaune</option>
+					<option class="color_7" value="7">Marron</option>
+				</select><br/>
 			</fieldset>
 			<fieldset>
 				<legend>Filtres : <span class="annotation">Optionnel</span><img src="{_IMGURL}help.png" class="help filtre_help" alt="help.png"/></legend>
-				<label for="color_p">X : </label><input type="checkbox" name="degrade" id="degrade" /><br/>
+				<label for="degrade">X : </label><input type="checkbox" name="degrade" id="degrade" /><br/>
 			</fieldset>
-			<input type="button" id = "submit" value="G&eacute;n&eacute;rer"/>
+			<input type="button" id = "submit_button" value="G&eacute;n&eacute;rer"/>
 		</form>
 	</div>
-	<div id="help">
+	<div id="help_bloc">
 		<div id="aide_principale" class="showed">
 			Ce Formulaire sert &agrave; la g&eacute;n&eacute;ration d'avatar.<br/><br/>
 			<u>Type:</u><br/>
@@ -73,7 +95,7 @@
 			<img src="images/ex_aleatoire.png" alt="ex_aleatoire.png"/> | <img src="images/sx_spaceInvader.png" alt="sx_spaceInvader.png"/>
 		</div>
 		
-		<div id="couleur_help">
+		<div id="color_help">
 			<u>Couleur:</u><br/>
 			<img src="images/ex_aleatoire.png" alt="ex_aleatoire.png"/> | <img src="images/sx_spaceInvader.png" alt="sx_spaceInvader.png"/>
 		</div>
